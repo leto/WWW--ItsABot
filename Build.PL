@@ -9,7 +9,8 @@ my $builder = Module::Build->new(
     dist_version_from   => 'lib/WWW/ItsABot.pm',
     dist_abstract       => 'Ask itsabot.com if a Twitter user is a bot',
     build_requires => {
-        'Test::More' => 0,
+        'Test::More'      => 0,
+        'Test::Exception' => 0,
     },
     requires => {
         'LWP::Simple' => 0,

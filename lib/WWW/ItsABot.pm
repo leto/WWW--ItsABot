@@ -23,6 +23,14 @@ our @EXPORT_OK = qw(is_a_bot);
 
 =head1 SYNOPSIS
 
+    use WWW::ItsABot qw/is_a_bot/;
+    my $username = 'foobar';
+    if ( is_a_bot($username) ) {
+        print "$username is a bot\n";
+    } else {
+        print "$username is not a bot\n";
+    }
+
 =head1 AUTHOR
 
 Jonathan Leto, C<< <jonathan at leto.net> >>
@@ -42,7 +50,11 @@ sub is_a_bot($)
     # user,followers,friends,statuses,isabot,follow_ratio,followers_per_tweet
     if ( $content ) {
         my (@info) = split ',', $content;
-        return $info[4] =~ /true/i ? 1 : 0;
+        if (defined $info[4]) {
+            return $info[4] =~ /true/i ? 1 : 0;
+        } else {
+            croak "is_a_bot(): user does not exist";
+        }
     } else {
         croak "is_a_bot(): did not get a response";
     }
