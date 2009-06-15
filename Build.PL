@@ -7,6 +7,7 @@ my $builder = Module::Build->new(
     license             => 'perl',
     dist_author         => 'Jonathan Leto <jonathan@leto.net>',
     dist_version_from   => 'lib/WWW/ItsABot.pm',
+    dist_abstract       => 'Ask itsabot.com if a Twitter user is a bot',
     build_requires => {
         'Test::More' => 0,
     },

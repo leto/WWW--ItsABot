@@ -2,6 +2,7 @@ package WWW::ItsABot;
 
 use warnings;
 use strict;
+use base 'Exporter';
 use LWP::Simple;
 use Carp qw/croak/;
 
@@ -17,6 +18,8 @@ Version 0.01
 
 our $VERSION = '0.01';
 our $itsabot_url = 'http://www.itsabot.com/User';
+our @EXPORT = ();
+our @EXPORT_OK = qw(is_a_bot);
 
 =head1 SYNOPSIS
 
@@ -39,7 +42,7 @@ sub is_a_bot($)
     # user,followers,friends,statuses,isabot,follow_ratio,followers_per_tweet
     if ( $content ) {
         my (@info) = split ',', $content;
-        return $info[4];
+        return $info[4] =~ /true/i ? 1 : 0;
     } else {
         croak "is_a_bot(): did not get a response";
     }
